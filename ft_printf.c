@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:54:10 by kclaudan          #+#    #+#             */
-/*   Updated: 2024/11/13 23:14:06 by kclaudan         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:24:27 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void	ft_putnbr_base(long long nbr, char *base, int r)
 
 	if (r == 1)
 		print_n_zero(nbr, base_number);
+
 	if (nbr < 0 && parsing_base(base))
 	{
 		write(1, "-", 1);
@@ -253,7 +254,7 @@ int		ft_printf(const char *format, ...)
 	int				counter;
 	char		format_letter;
 	va_list		args;
-	
+
 	i = 0;
 	counter = 0;
 	va_start(args, format);
@@ -281,10 +282,8 @@ int main(int ac, char **argv)
 	char *name = "kylian";
 	int x = 42;
 	//ft_putnbr_base((long long)&x, "0123456789abcdef");
-	int i = ft_printf("Mon printf (1) : Adresse de x : %x\n", 0);  // Utilisation de %p avec un pointeur sur x
-	printf("return de i : %d\n", i);
-	i = printf("Mon printf (0) : Adresse de x : %x\n", 0);  // Utilisation de %p avec un pointeur sur x
-	printf("return de i : %d", i);
+	int i = ft_printf("Mon printf : Hexa minuscule : %x, string : %s, num : %d, hexa en maj : %X, adresse d'un ptr : %p\n", 12, "saperlipopete", 15, 255, &x);  // Utilisation de %p avec un pointeur sur x
+	printf("Mon printf : Hexa minuscule : %x, string : %s, num : %d, hexa en maj : %X, adresse d'un ptr : %p\n", 12, "saperlipopete", 15, 255, &x);  // Utilisation de %p avec un pointeur sur x
 /*	int i = ft_printf("SALUT TLMD jai %d ans dwadad %s et je mappele %s\n", 15, name, "BLABLABLA", "dwdad");
 	int j = printf("SALUT TLMD jai %d ans dwadad %s et je mappele %s\n", 15, name, "BLABLABLA", "dwdad");
 	printf("%d\n", i);
