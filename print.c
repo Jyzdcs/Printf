@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 void	ft_putchar(const char c)
 {
@@ -31,7 +31,7 @@ int	ft_putstr(const char *str)
 }
 
 int	print_u(unsigned int n)
-{	
+{
 	int	counter;
 
 	counter = 0;

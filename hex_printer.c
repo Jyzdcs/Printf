@@ -10,43 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_putchar_base(int nb, char *base)
+int	ft_putchar_base(int nb, int maj)
 {
-	write(1, &base[nb], 1);
+	const char	*base_1 = "0123456789abcdef";
+	const char	*base_2 = "0123456789ABCDEF";
+
+	if (maj)
+		write(1, &base_2[nb], 1);
+	write(1, &base_1[nb], 1);
 	return (1);
 }
 
-int	ft_len_str(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	ft_print_0x()
+int	ft_print_0x(void)
 {
 	write(1, "0x", 2);
 	return (2);
 }
 
-int	ft_putnbr_base(unsigned int nbr, char *base, int r)
+int	ft_putnbr_base(unsigned int nbr, int r, int maj)
 {
-	unsigned int const	base_number = ft_len_str(base);
-	int		counter = 1;
+	int	counter;
 
+	counter = 1;
 	if (r == 1)
 		counter += ft_print_0x();
-	if (nbr >= base_number)
+	if (nbr >= 16)
 	{
-		counter += ft_putnbr_base(nbr / base_number, base, 0);
-		ft_putnbr_base(nbr % base_number, base, 0);
+		counter += ft_putnbr_base(nbr / 16, 0, maj);
+		ft_putnbr_base(nbr % 16, 0, maj);
 	}
 	else
-		ft_putchar_base(nbr, base);
+		ft_putchar_base(nbr, maj);
 	return (counter);
 }
