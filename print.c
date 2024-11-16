@@ -34,13 +34,11 @@ int	print_u(unsigned int n)
 {
 	int	counter;
 
-	counter = 0;
-	while (n)
-	{
-		ft_putchar(n % 10 + '0');
-		n /= 10;
-		counter++;
-	}
+	counter = 1;
+	if (n <= 0)
+		return (0);
+	counter += print_u(n / 10);
+	ft_putchar(n % 10 + '0');
 	return (counter);
 }
 
@@ -58,7 +56,7 @@ int	print_d(int n, int fd, int counter)
 	}
 	if (n > 9)
 	{
-		counter = print_d(n / 10, fd, counter + 1);
+		counter += print_d(n / 10, fd, counter + 1);
 		ft_putchar(n % 10 + '0');
 		return (counter);
 	}

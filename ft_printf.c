@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:54:10 by kclaudan          #+#    #+#             */
-/*   Updated: 2024/11/15 16:52:17 by kclaudan         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:15:16 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	format_print(char f, va_list *args)
 	else if (f == 's')
 		return (ft_putstr(va_arg(*args, const char *)));
 	else if (f == 'd' || f == 'i')
-		return (print_d(va_arg(*args, int), 1, 0));
+		return (print_d(va_arg(*args, int), 1, 1));
 	else if (f == 'p')
 		return (ft_putnbr_base((unsigned long)va_arg(*args, void *), 1, 0));
 	else if (f == 'u')
-		return (print_u(va_arg(*args, int)));
+		return (print_u(va_arg(*args, unsigned int)));
 	else if (f == 'x')
 		return (ft_putnbr_base((unsigned int)va_arg(*args, int), 0, 0));
 	else if (f == 'X')
@@ -74,7 +74,7 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (counter);
 }
-/*
+
 int main(int ac, char **argv)
 {
 	(void)ac;
@@ -83,9 +83,8 @@ int main(int ac, char **argv)
 	int x = 42;
 	int e = -42;
 
-	int i = ft_printf("Bonjour %s, dwad %X-%x-%X\n", "kylian", -42, 32);
+	int i = ft_printf("Bonjour %s, jai %d mais jai aussi %x et %X et mon adresse est %p je suis sur a %% que %c peuvent win %i\n", "kylian", -42, -42, -42, &x, 'c', 16);
 	ft_printf("%d\n", i);
-	i = printf("Bonjour %s, dwad %X-%x-%X\n", "kylian", -42, );
+	i = printf("Bonjour %s, jai %d mais jai aussi %x et %X et mon adresse est %p je suis sur a %% que %c peuvent win %i\n", "kylian", -42, -42, -42, &x, 'c', 16);
 	printf("%d\n", i);
 }
-*/

@@ -19,7 +19,8 @@ int	ft_putchar_base(int nb, int maj)
 
 	if (maj)
 		write(1, &base_2[nb], 1);
-	write(1, &base_1[nb], 1);
+	else
+		write(1, &base_1[nb], 1);
 	return (1);
 }
 
@@ -29,7 +30,7 @@ int	ft_print_0x(void)
 	return (2);
 }
 
-int	ft_putnbr_base(unsigned int nbr, int r, int maj)
+int	ft_putnbr_base(unsigned long nbr, int r, int maj)
 {
 	int	counter;
 
