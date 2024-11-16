@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:54:10 by kclaudan          #+#    #+#             */
-/*   Updated: 2024/11/16 17:27:55 by kclaudan         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:38:11 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ int	is_format_specifier(const char f)
 
 int	format_print(char f, va_list *args)
 {
+	int	counter;
+	
 	if (f == 'c')
-		ft_putchar((const char)va_arg(*args, int));
+		return (ft_putchar((const char)va_arg(*args, int)));
 	else if (f == 's')
 		return (ft_putstr(va_arg(*args, const char *)));
 	else if (f == 'd' || f == 'i')
@@ -42,8 +44,7 @@ int	format_print(char f, va_list *args)
 	else if (f == 'X')
 		return (ft_putnbr_base((unsigned int)va_arg(*args, int), 0, 1));
 	else if (f == '%')
-		ft_putchar('%');
-	return (1);
+		return (ft_putchar('%'));
 }
 
 int	ft_printf(const char *format, ...)
@@ -83,6 +84,6 @@ int main(int ac, char **argv)
 	int x = 42;
 	char *e = NULL;
 
-	ft_printf("%s", e);
-	printf("\n%s", e);
+	ft_printf("%p", NULL);
+	printf("\n%p", NULL);
 }

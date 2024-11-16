@@ -34,6 +34,8 @@ int	ft_putnbr_base(unsigned long nbr, int r, int maj)
 {
 	int	counter;
 
+	if (!nbr)
+		return (ft_putstr("(nil)"));
 	counter = 1;
 	if (r == 1)
 		counter += ft_print_0x();

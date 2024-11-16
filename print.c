@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-void	ft_putchar(const char c)
+int	ft_putchar(const char c)
 {
-	write(1, &c, 1);
+	return (write(1, &c, 1));
 }
 
 int	ft_putstr(const char *str)
