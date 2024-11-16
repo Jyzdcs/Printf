@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:54:10 by kclaudan          #+#    #+#             */
-/*   Updated: 2024/11/16 12:15:16 by kclaudan         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:27:55 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,8 @@ int main(int ac, char **argv)
 	(void)argv;
 	//char *name = "kylian";
 	int x = 42;
-	int e = -42;
+	char *e = NULL;
 
-	int i = ft_printf("Bonjour %s, jai %d mais jai aussi %x et %X et mon adresse est %p je suis sur a %% que %c peuvent win %i\n", "kylian", -42, -42, -42, &x, 'c', 16);
-	ft_printf("%d\n", i);
-	i = printf("Bonjour %s, jai %d mais jai aussi %x et %X et mon adresse est %p je suis sur a %% que %c peuvent win %i\n", "kylian", -42, -42, -42, &x, 'c', 16);
-	printf("%d\n", i);
+	ft_printf("%s", e);
+	printf("\n%s", e);
 }

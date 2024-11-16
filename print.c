@@ -21,6 +21,11 @@ int	ft_putstr(const char *str)
 {
 	int	counter;
 
+	if (!str)
+	{
+		ft_putstr("(null)");
+		return (4);
+	}
 	counter = 0;
 	while (*str)
 	{
