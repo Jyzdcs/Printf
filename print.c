@@ -12,60 +12,48 @@
 
 #include "ft_printf.h"
 
-int	ft_putchar(const char c)
+void	ft_putchar(const char c, int *counter)
 {
-	return (write(1, &c, 1));
+	*counter += write(1, &c, 1);
 }
 
-int	ft_putstr(const char *str)
+void	ft_putstr(const char *str, int *counter)
 {
-	int	counter;
-
 	if (!str)
 	{
-		ft_putstr("(null)");
-		return (4);
+		ft_putstr("(null)", counter);
+		return ;
 	}
-	counter = 0;
 	while (*str)
-	{
-		ft_putchar(*str++);
-		counter++;
-	}
-	return (counter);
+		ft_putchar(*str++, counter);
 }
 
-int	print_u(unsigned int n)
+void	print_u(unsigned int n, int *counter)
 {
-	int	counter;
-
-	counter = 1;
-	if (n <= 0)
-		return (0);
-	counter += print_u(n / 10);
-	ft_putchar(n % 10 + '0');
-	return (counter);
+	if (n > 9)
+		print_u(n / 10, counter);
+	ft_putchar(n % 10 + '0', counter);
 }
 
-int	print_d(int n, int fd, int counter)
+void	print_d(int n, int *counter)
 {
 	if (n < 0)
 	{
 		if (n == -2147483648)
 		{
-			ft_putstr("-2147483648");
-			return (11);
+			ft_putstr("-2147483648", counter);
+			return ;
 		}
-		ft_putchar('-');
-		return (print_d(-n, fd, counter + 1));
+		ft_putchar('-', counter);
+		return (print_d(-n, counter));
 	}
 	if (n > 9)
 	{
-		counter += print_d(n / 10, fd, counter + 1);
-		ft_putchar(n % 10 + '0');
-		return (counter);
+		print_d(n / 10, counter);
+		ft_putchar(n % 10 + '0', counter);
+		return ;
 	}
 	else
-		ft_putchar(n + '0');
-	return (1);
+		ft_putchar(n + '0', counter);
+	return ;
 }

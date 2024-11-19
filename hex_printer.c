@@ -12,39 +12,36 @@
 
 #include "ft_printf.h"
 
-int	ft_putchar_base(int nb, int maj)
+void	ft_putchar_base(int nb, int maj, int *counter)
 {
 	const char	*base_1 = "0123456789abcdef";
 	const char	*base_2 = "0123456789ABCDEF";
 
 	if (maj)
-		write(1, &base_2[nb], 1);
+		*counter += write(1, &base_2[nb], 1);
 	else
-		write(1, &base_1[nb], 1);
-	return (1);
+		*counter += write(1, &base_1[nb], 1);
 }
 
-int	ft_print_0x(void)
+void	ft_print_0x(int *counter)
 {
-	write(1, "0x", 2);
-	return (2);
+	*counter += write(1, "0x", 2);
 }
 
-int	ft_putnbr_base(unsigned long nbr, int r, int maj)
+void	ft_putnbr_base(unsigned long nbr, int r, int maj, int *counter)
 {
-	int	counter;
-
-	if (!nbr)
-		return (ft_putstr("(nil)"));
-	counter = 1;
-	if (r == 1)
-		counter += ft_print_0x();
-	if (nbr >= 16)
+	if (nbr == 0 && r)
 	{
-		counter += ft_putnbr_base(nbr / 16, 0, maj);
-		ft_putnbr_base(nbr % 16, 0, maj);
+		ft_putstr("(nil)", counter);
+		return ;
 	}
-	else
-		ft_putchar_base(nbr, maj);
-	return (counter);
+	if (r == 1)
+		ft_print_0x(counter);
+	if (nbr > 15)
+	{
+		ft_putnbr_base(nbr / 16, 0, maj, counter);
+		ft_putchar_base(nbr % 16, maj, counter);
+		return ;
+	}
+	ft_putchar_base(nbr % 16, maj, counter);
 }

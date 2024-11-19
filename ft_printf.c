@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:54:10 by kclaudan          #+#    #+#             */
-/*   Updated: 2024/11/16 19:38:11 by kclaudan         ###   ########.fr       */
+/*   Updated: 2024/11/19 21:11:37 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,25 @@ int	is_format_specifier(const char f)
 	return (0);
 }
 
-int	format_print(char f, va_list *args)
+int	format_print(char f, va_list *args, int *counter)
 {
-	int	counter;
-	
 	if (f == 'c')
-		return (ft_putchar((const char)va_arg(*args, int)));
+		ft_putchar((const char)va_arg(*args, int), counter);
 	else if (f == 's')
-		return (ft_putstr(va_arg(*args, const char *)));
+		ft_putstr(va_arg(*args, const char *), counter);
 	else if (f == 'd' || f == 'i')
-		return (print_d(va_arg(*args, int), 1, 1));
+		print_d(va_arg(*args, int), counter);
 	else if (f == 'p')
-		return (ft_putnbr_base((unsigned long)va_arg(*args, void *), 1, 0));
+		ft_putnbr_base((unsigned long)va_arg(*args, void *), 1, 0, counter);
 	else if (f == 'u')
-		return (print_u(va_arg(*args, unsigned int)));
+		print_u(va_arg(*args, unsigned int), counter);
 	else if (f == 'x')
-		return (ft_putnbr_base((unsigned int)va_arg(*args, int), 0, 0));
+		ft_putnbr_base((unsigned int)va_arg(*args, int), 0, 0, counter);
 	else if (f == 'X')
-		return (ft_putnbr_base((unsigned int)va_arg(*args, int), 0, 1));
+		ft_putnbr_base((unsigned int)va_arg(*args, int), 0, 1, counter);
 	else if (f == '%')
-		return (ft_putchar('%'));
+		ft_putchar('%', counter);
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -62,28 +61,29 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%' && is_format_specifier(format[i + 1]))
 		{
 			format_letter = format[i + 1];
-			counter += format_print(format_letter, &args);
+			format_print(format_letter, &args, &counter);
 			i += 2;
 		}
 		else
 		{
-			ft_putchar(format[i]);
-			counter++;
+			ft_putchar(format[i], &counter);
 			i++;
 		}
 	}
 	va_end(args);
 	return (counter);
 }
-
+/*
+#include <limits.h>
 int main(int ac, char **argv)
 {
 	(void)ac;
 	(void)argv;
-	//char *name = "kylian";
-	int x = 42;
-	char *e = NULL;
+	int a = 1;
+	int *x = &a;
 
-	ft_printf("%p", NULL);
-	printf("\n%p", NULL);
-}
+	int i = ft_printf(" %x \n", 0);
+	ft_printf("char lu1 : %d\n", i);
+	i = printf(" %x \n", 0);
+	ft_printf("char lu2 : %d\n", i);
+}*/
