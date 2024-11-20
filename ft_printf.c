@@ -51,8 +51,9 @@ int	ft_printf(const char *format, ...)
 	int		i;
 	int		counter;
 	va_list	args;
-	char	format_letter;
 
+	if (!format)
+		return (-1);
 	i = 0;
 	counter = 0;
 	va_start(args, format);
@@ -60,8 +61,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%' && is_format_specifier(format[i + 1]))
 		{
-			format_letter = format[i + 1];
-			format_print(format_letter, &args, &counter);
+			format_print(format[i + 1];, &args, &counter);
 			i += 2;
 		}
 		else
